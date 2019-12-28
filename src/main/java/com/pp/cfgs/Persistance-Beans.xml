@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+<bean id = "dataSource" class ="org.apache.commons.dbcp.BasicDataSource">
+<property name="driverClassName" value ="oracle.jdbc.driver.OracleDriver"/>
+<property name="url" value = "jdbc:oracle:thin:@localhost:1521:orcl"/>
+<property name = "username" value = "scott"/>
+<property name="password" value ="patel"/>
+</bean>
+<bean id = "template" class = "org.springframework.jdbc.core.JdbcTemplate">
+<property name="dataSource" ref="dataSource"></property>
+</bean>
+
+<bean id = "DBODao" class ="com.pp.dao.DBOperationDAO">
+<property name="jt" ref ="template"/>
+</bean>
+<bean id ="DBOService" class ="com.pp.service.DBOperationService">
+<property name="dao" ref = "DBODao"></property>
+</bean>
+</beans>
